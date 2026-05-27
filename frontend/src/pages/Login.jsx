@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useToast } from '../context/ToastContext';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
 function Login() {
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState('');
@@ -25,7 +27,7 @@ function Login() {
     try {
       if (isLogin) {
         // LOGIN
-        const response = await axios.post('http://localhost:5000/api/auth/login', {
+        const response = await axios.post(`${API_URL}/auth/login`, {
           email,
           password
         });
@@ -56,7 +58,7 @@ function Login() {
           expertise: role === 'TECHNICIAN' ? expertise : null
         };
         
-        const response = await axios.post('http://localhost:5000/api/auth/register', formData);
+        const response = await axios.post(`${API_URL}/auth/register`, formData);
         const { user, token } = response.data;
         
         localStorage.setItem('user', JSON.stringify(user));

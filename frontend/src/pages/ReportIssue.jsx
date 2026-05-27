@@ -10,6 +10,9 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { useToast } from '../context/ToastContext';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
+
 function ReportIssue() {
   const [formData, setFormData] = useState({
     title: '',
@@ -104,7 +107,7 @@ function ReportIssue() {
       showToast('Uploading your file...', 'info', 2000);
     }
     
-    const response = await axios.post('http://localhost:5000/api/issues', formDataToSend, {
+    const response = await axios.post(`${API_URL}/issues`, formDataToSend, {
       headers: {
         'Content-Type': 'multipart/form-data',
         'Authorization': `Bearer ${token}`

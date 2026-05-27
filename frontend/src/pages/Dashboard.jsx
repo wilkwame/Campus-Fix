@@ -12,6 +12,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { useToast } from '../context/ToastContext';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 function Dashboard({ user: propUser, onLogout }) {
   const [user, setUser] = useState(() => {
@@ -40,8 +41,8 @@ function Dashboard({ user: propUser, onLogout }) {
 
   const fetchIssues = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/issues');
-      setIssues(response.data);
+      const response = await axios.get(`${API_URL}/issues`);
+            setIssues(response.data);
     } catch (error) {
       console.error('Error fetching issues:', error);
     } finally {
@@ -51,7 +52,7 @@ function Dashboard({ user: propUser, onLogout }) {
 
   const fetchNotifications = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/notifications');
+      const response = await axios.get(`${API_URL}/notifications`);
       setNotifications(response.data);
     } catch (error) {
       console.error('Error fetching notifications:', error);

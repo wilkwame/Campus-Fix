@@ -19,6 +19,8 @@ function App() {
       <Route path="/issue/:id" element={isAuthenticated ? <IssueDetail /> : <Navigate to="/login" />} />
       <Route path="/admin" element={isAuthenticated ? <AdminDashboard /> : <Navigate to="/login" />} />
       <Route path="/" element={<Navigate to="/login" />} />
+      // Add a catch-all route at the end
+<Route path="*" element={<Navigate to="/login" />} />
     </Routes>
   );
 }
